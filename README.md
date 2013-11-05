@@ -1,5 +1,7 @@
 ## Twitter API Flask example
 
+Uses [the wonderful SixOhSix Twitter library](https://github.com/sixohsix/twitter)
+
 ### Requirements
 
 * Python 2.7.x
