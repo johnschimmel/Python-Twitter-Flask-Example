@@ -5,7 +5,6 @@
 * Python 2.7.x
 * Virtualenv
 * PIP
-
 * Heroku Toolbelt / Foreman
 * Twitter Account
 
