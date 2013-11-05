@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="row">
+	<div class="col-md-12">
+		<form action="/search">
+			<input type="search" name="q">
+			<input type="submit" value="search twitter">
+		</form>
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-5">
+		<h3>{{title}}</h3>
+
+		<ul>
+			{% for t in myTweets %}
+			<li>
+				<p>
+					{{ t.text }}
+					<br>
+					<strong>@{{ t.user.screen_name }}</strong>
+					| <a href="https://www.twitter.com/{{t.user.screen_name}}/status/{{t.id}}">link</a>
+					<br>
+					{{t.created_at|strftime}}
+
+					{% if t.entities.urls%}
+					<br>
+					<i>tweet links</i>
+					<ol>
+						{% for url in t.entities.urls %}
+						<li><a href="{{url.expanded_url}}">{{url.expanded_url}}</a></li>
+						{% endfor %}
+					</ol>
+					{% endif %}
+				</p>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="col-md-5">
+		<h3>ITP Tweets</h3>
+		<ul>
+			{% for t in itpTweets %}
+			<li>
+				<p>
+					{{ t.text }}
+					<br>
+					<strong>@{{ t.user.screen_name }}</strong>
+					| <a href="https://www.twitter.com/{{t.user.screen_name}}/status/{{t.id}}">link</a>
+					<br>
+					{{t.created_at|strftime}}
+
+					{% if t.entities.urls%}
+					<br>
+					<i>tweet links</i>
+					<ol>
+						{% for url in t.entities.urls %}
+						<li><a href="{{url.expanded_url}}">{{url.expanded_url}}</a></li>
+						{% endfor %}
+					</ol>
+					{% endif %}
+				</p>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+</div>
+
+{% endblock %}
