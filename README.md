@@ -8,6 +8,8 @@
 * Heroku Toolbelt / Foreman
 * Twitter Account
 
+How to install these requirements is [here](http://itppyweb.herokuapp.com/notes/week_1), halfway down page
+
 ## How to run locally
 
 ### Download code
