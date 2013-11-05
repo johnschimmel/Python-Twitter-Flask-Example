@@ -57,7 +57,16 @@ Start your engines
 
 	foreman start
 
+OR
+
+	. start
+
 ### Enjoy
 
 Open browser, <http://localhost:5000>
+
+
+### Stop server 
+
+	Ctrl+C
 
