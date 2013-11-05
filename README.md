@@ -6,13 +6,14 @@
 * Virtualenv
 * PIP
 
+* Heroku Toolbelt / Foreman
 * Twitter Account
 
 ## How to run locally
 
 ### Download code
 
-### Set up virtual environment
+## Set up virtual environment
 
 Navigate to code directory in Terminal and run following command
 
@@ -26,16 +27,18 @@ Navigate to code directory in Terminal and run following command
 		pip install -r requirements.txt
 
 
-### Create Twitter App for Developers
+## Create Twitter Application/Account
 
 * Create new app here, <https://dev.twitter.com/apps>.
 * Set application as **Read and Write** capable
+
+Click the button on the bottom of your app to create an OAUTH Key and Secret for yourself to use.
 
 ### Set up Twitter Credentials
 
 In your Application settings, find the tokens and keys, you will need these to use the Twitter API.
 
-Create **.env** file with the followin
+Create **.env** file with the following
 
 
 	OAUTH_TOKEN=YOUROAUTHTOKENHERE
@@ -43,10 +46,10 @@ Create **.env** file with the followin
 	CONSUMER_KEY=YOURCONSUMERKEYHERE
 	CONSUMER_SECRET=YOURCONSUMERSECRETHERE
 
-Save as **.env**
+Save as **.env** in your code directory.
 
 
-### Start the server
+## Start the server
 
 To start server you must have Foreman / [Heroku toolbelt](http://toolbelt.heroku.com) installed. Foreman will read your .env files to get your credentials.
 
@@ -54,7 +57,7 @@ Start your engines
 
 	foreman start
 
-## Enjoy
+### Enjoy
 
 Open browser, <http://localhost:5000>
 
