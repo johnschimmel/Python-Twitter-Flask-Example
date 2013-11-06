@@ -15,10 +15,14 @@ twitter = Twitter(
 @app.route('/')
 def main():
 
-	myTweets = twitter.statuses.user_timeline(count=3)
-	itpTweets = twitter.statuses.user_timeline(screen_name='itp_nyu', count=3)
+	# fetch 3 tweets from my account
+	myTweets = twitter.statuses.user_timeline(count=10)
+
+	# fetch 3 tweets from ITP_NYU
+	itpTweets = twitter.statuses.user_timeline(screen_name='itp_nyu', count=10)
 	
-	app.logger.debug(itpTweets)
+	# app.logger.debug(itpTweets)
+
 	templateData = {
 		'title' : 'My last three tweets',
 		'myTweets' : myTweets,
@@ -29,7 +33,7 @@ def main():
 
 
 @app.route('/search')
-def itp_tweets():
+def search():
 
 	# get search term from querystring 'q'
 	query = request.args.get('q','#redburns')
@@ -37,6 +41,9 @@ def itp_tweets():
 	# search with query term and return 10
 	results = twitter.search.tweets(q=query, count=50)
 	
+	# return jsonify(results)
+	# app.logger.debug(results)
+
 	templateData = {
 		'query' : query,
 		'tweets' : results.get('statuses')
@@ -45,19 +52,19 @@ def itp_tweets():
 	return render_template('search.html', **templateData)
 
 
-# @app.route('/post', methods=['GET','POST'])
-# def post_to_twitter():
+@app.route('/post', methods=['GET','POST'])
+def post_to_twitter():
 
-# 	if request.method == 'POST':
-# 		result = twitter.statuses.update(status=request.form.get('status'))
+	if request.method == 'POST':
+		result = twitter.statuses.update(status=request.form.get('status'))
 
-# 		app.logger.debug(result)
+		app.logger.debug(result)
 
-# 		# redirect to new twitter status post
-# 		return redirect('http://www.twitter.com/%s/status/%s' % (result['user']['screen_name'], result.get('id')))
+		# redirect to new twitter status post
+		return redirect('http://www.twitter.com/%s/status/%s' % (result['user']['screen_name'], result.get('id')))
 
-# 	else:
-# 		return render_template('post_to_twitter.html')
+	else:
+		return render_template('post_to_twitter.html')
 
 	
 @app.errorhandler(404)
@@ -69,7 +76,7 @@ def page_not_found(error):
 @app.template_filter('strftime')
 def _jinja2_filter_datetime(date, fmt=None):
     pyDate = time.strptime(date,'%a %b %d %H:%M:%S +0000 %Y') # convert twitter date string into python date/time
-    return time.strftime('%Y-%m-%d %h:%M:%S', pyDate) # return the formatted date.
+    return time.strftime('%Y-%m-%d %H:%M:%S', pyDate) # return the formatted date.
     
 # --------- Server On ----------
 # start the webserver
@@ -78,3 +85,5 @@ if __name__ == "__main__":
 	
 	port = int(os.environ.get('PORT', 5000)) # locally PORT 5000, Heroku will assign its own port
 	app.run(host='0.0.0.0', port=port)
+
+
